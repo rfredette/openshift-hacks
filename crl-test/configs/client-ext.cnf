@@ -1,0 +1,14 @@
+crlDistributionPoints=intermediate_crl_cdp
+basicConstraints=CA:FALSE
+
+[intermediate_crl_cdp]
+fullname=URI:http://crl-host.crl-test.svc/intermediate/intermediate.crl
+CRLissuer=dirName:intermediate_crl_issuer
+
+[intermediate_crl_issuer]
+C=US
+ST=NC
+L=Raleigh
+O=OS4
+OU=Eng
+CN=Test Intermediate CA

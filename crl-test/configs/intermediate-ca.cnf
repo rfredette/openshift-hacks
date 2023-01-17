@@ -1,0 +1,27 @@
+crlDistributionPoints=root_crl_cdp
+subjectKeyIdentifier=hash
+basicConstraints=CA:TRUE
+
+[ca]
+default_ca=intermediate_ca
+
+[intermediate_ca]
+authorityKeyIdentifier=keyid,issuer
+certificate=artifacts/intermediate-ca.crt
+database=artifacts/intermediate-crl-index.txt
+default_crl_hours=1
+default_md=sha256
+private_key=artifacts/intermediate-ca.key
+
+[root_crl_cdp]
+fullname=URI:http://crl-host.crl-test.svc/root/root.crl
+CRLissuer=dirName:root_crl_issuer
+
+[root_crl_issuer]
+C=US
+ST=NC
+L=Raleigh
+O=OS4
+OU=Eng
+CN=Test Root CA
+
