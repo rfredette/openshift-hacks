@@ -1,5 +1,6 @@
 crlDistributionPoints=root_crl_cdp
 subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid, issuer
 basicConstraints=CA:TRUE
 
 [ca]
@@ -12,6 +13,7 @@ database=artifacts/intermediate-crl-index.txt
 default_crl_hours=1
 default_md=sha256
 private_key=artifacts/intermediate-ca.key
+crl_extensions=crl_exts
 
 [root_crl_cdp]
 fullname=URI:http://crl-host.crl-test.svc/root/root.crl
@@ -25,3 +27,5 @@ O=OS4
 OU=Eng
 CN=Test Root CA
 
+[crl_exts]
+authorityKeyIdentifier=keyid, issuer
