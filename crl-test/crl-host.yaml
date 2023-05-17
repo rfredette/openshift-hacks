@@ -48,3 +48,19 @@ spec:
     port: 80
     targetPort: http-svc
     name: http
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: crl-host
+  namespace: crl-test
+  labels:
+    app: crl-host
+spec:
+  port:
+    targetPort: http
+  to:
+    kind: Service
+    name: crl-host
+    weight: 100
+  wildcardPolicy: None

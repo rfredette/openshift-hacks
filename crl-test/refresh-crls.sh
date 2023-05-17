@@ -12,6 +12,10 @@ mkdir -p artifacts
 echo "Generating root CRL..."
 # Blank out index.txt to reset the list of revoked certs
 openssl ca -gencrl -crlhours 1 -out artifacts/root.crl -config configs/root-ca.cnf
+openssl crl -in artifacts/root.crl -inform PEM -out artifacts/root.der.crl -outform der
+mv artifacts/root.der.crl artifacts/root.crl
 echo "Generating intermediate CRL..."
 # Blank out index.txt to reset the list of revoked certs
 openssl ca -gencrl -crlhours 1 -out artifacts/intermediate.crl -config configs/intermediate-ca.cnf
+openssl crl -in artifacts/intermediate.crl -inform PEM -out artifacts/intermediate.der.crl -outform der
+mv artifacts/intermediate.der.crl artifacts/intermediate.crl
