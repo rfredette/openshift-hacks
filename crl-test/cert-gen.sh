@@ -24,7 +24,7 @@ echo "Generating CA certificate bundle..."
 cat artifacts/intermediate-ca.crt artifacts/root-ca.crt > artifacts/ca-bundle.pem
 echo "Generating client certificate signed by root..."
 openssl req -new -key artifacts/signed-by-root.key -out artifacts/signed-by-root.csr -subj "/C=US/ST=NC/L=Raleigh/O=OS4/OU=Eng/CN=Test Client"
-openssl x509 -req -days 1 -in artifacts/signed-by-root.csr -CA artifacts/root-ca.crt -CAcreateserial -CAkey artifacts/root-ca.key -out artifacts/signed-by-root.crt
+openssl x509 -req -days 1 -in artifacts/signed-by-root.csr -CA artifacts/root-ca.crt -CAcreateserial -CAkey artifacts/root-ca.key -out artifacts/signed-by-root.crt --extfile configs/root-client.cnf
 cat artifacts/signed-by-root.crt artifacts/root-ca.crt > artifacts/signed-by-root.pem
 echo "Generating client certificate signed by intermediate..."
 openssl req -new -key artifacts/signed-by-intermediate.key -out artifacts/signed-by-intermediate.csr -subj "/C=US/ST=NC/L=Raleigh/O=OS4/OU=Eng/CN=Another Test Client"
@@ -32,7 +32,7 @@ openssl x509 -req -days 1 -in artifacts/signed-by-intermediate.csr -CA artifacts
 cat artifacts/signed-by-intermediate.crt artifacts/intermediate-ca.crt artifacts/root-ca.crt > artifacts/signed-by-intermediate.pem
 echo "Generating certificate for root to revoke..."
 openssl req -new -key artifacts/revoked-by-root.key -out artifacts/revoked-by-root.csr -subj "/C=US/ST=NC/L=Raleigh/O=OS4/OU=Eng/CN=Revoked by Root Test"
-openssl x509 -req -days 1 -in artifacts/revoked-by-root.csr -CA artifacts/root-ca.crt -CAcreateserial -CAkey artifacts/root-ca.key -out artifacts/revoked-by-root.crt
+openssl x509 -req -days 1 -in artifacts/revoked-by-root.csr -CA artifacts/root-ca.crt -CAcreateserial -CAkey artifacts/root-ca.key -out artifacts/revoked-by-root.crt --extfile configs/root-client.cnf
 cat artifacts/revoked-by-root.crt artifacts/root-ca.crt > artifacts/revoked-by-root.pem
 echo "Generating certificate for intermediate to revoke..."
 openssl req -new -key artifacts/revoked-by-intermediate.key -out artifacts/revoked-by-intermediate.csr -subj "/C=US/ST=NC/L=Raleigh/O=OS4/OU=Eng/CN=Revoked by Intermediate Test"
@@ -41,7 +41,7 @@ cat artifacts/revoked-by-intermediate.crt artifacts/intermediate-ca.crt artifact
 echo "Generating root CRL..."
 # Blank out index.txt to reset the list of revoked certs
 cat /dev/null > artifacts/root-crl-index.txt
-openssl ca -gencrl -crlhours 1 -out artifacts/root.crl -config configs/root-ca.cnf
+faketime '5 minutes ago' openssl ca -gencrl -crlhours 1 -out artifacts/root.crl -config configs/root-ca.cnf
 echo "Generating intermediate CRL..."
 # Blank out index.txt to reset the list of revoked certs
 cat /dev/null > artifacts/intermediate-crl-index.txt

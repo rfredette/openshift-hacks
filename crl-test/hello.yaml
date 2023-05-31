@@ -19,8 +19,13 @@ spec:
       name: hello-http
     volumeMounts:
     - name: http-cm
-      mountPath: '/var/www/html/'
+      mountPath: '/var/www/html/test'
       readOnly: true
+    readinessProbe:
+      httpGet:
+        path: "/"
+        port: hello-http
+        scheme: HTTP
   volumes:
   - name: http-cm
     configMap:

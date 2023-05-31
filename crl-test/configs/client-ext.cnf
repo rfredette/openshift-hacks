@@ -3,7 +3,7 @@ basicConstraints=CA:FALSE
 
 [intermediate_crl_cdp]
 fullname=URI:http://crl-host.crl-test.svc/intermediate/intermediate.crl
-CRLissuer=dirName:intermediate_crl_issuer
+#CRLissuer=dirName:intermediate_crl_issuer
 
 [intermediate_crl_issuer]
 C=US
