@@ -1,0 +1,15 @@
+crlDistributionPoints=root_crl_cdp
+basicConstraints=CA:FALSE
+
+[root_crl_cdp]
+fullname=URI:http://crl-host.crl-test.svc/root/root.crl
+#fullname=URI:http://crl-host-crl-test.apps.ci-ln-0hvm2ct-72292.origin-ci-int-gce.dev.rhcloud.com/root/root.crl
+CRLissuer=dirName:root_crl_issuer
+
+[root_crl_issuer]
+C=US
+ST=NC
+L=Raleigh
+O=OS4
+OU=Eng
+CN=Test Root CA
