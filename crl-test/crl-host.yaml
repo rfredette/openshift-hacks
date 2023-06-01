@@ -13,19 +13,19 @@ spec:
     - containerPort: 8080
       name: http-svc
     volumeMounts:
-    #- name: crl-root-cm
-      #mountPath: '/var/www/html/root/'
-      #readOnly: true
-    #- name: crl-intermediate-cm
-      #mountPath: '/var/www/html/intermediate/'
-      #readOnly: true
+    - name: crl-root-cm
+      mountPath: '/var/www/html/root/'
+      readOnly: true
+    - name: crl-intermediate-cm
+      mountPath: '/var/www/html/intermediate/'
+      readOnly: true
   volumes:
-  #- name: crl-root-cm
-    #configMap:
-      #name: crl-root
-  #- name: crl-intermediate-cm
-    #configMap:
-      #name: crl-intermediate
+  - name: crl-root-cm
+    configMap:
+      name: crl-root
+  - name: crl-intermediate-cm
+    configMap:
+      name: crl-intermediate
   securityContext:
     allowPrivilegeEscalation: false
     capabilities:
