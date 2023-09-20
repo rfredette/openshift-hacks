@@ -19,11 +19,11 @@ spec:
       name: hello-http
     volumeMounts:
     - name: http-cm
-      mountPath: '/var/www/html/test'
+      mountPath: '/var/www/html/'
       readOnly: true
     readinessProbe:
       httpGet:
-        path: "/"
+        path: "/index.html"
         port: hello-http
         scheme: HTTP
   volumes:
@@ -79,3 +79,4 @@ spec:
   wildcardPolicy: None
   tls:
     termination: edge
+    insecureEdgeTerminationPolicy: Redirect
