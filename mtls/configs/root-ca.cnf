@@ -1,0 +1,17 @@
+subjectKeyIdentifier=hash
+authorityKeyIdentifier=keyid, issuer
+basicConstraints=CA:TRUE
+
+[ca]
+default_ca=root_ca
+
+[root_ca]
+certificate=artifacts/root-ca.crt
+database=artifacts/root-crl-index.txt
+default_crl_hours=1
+default_md=sha256
+private_key=artifacts/root-ca.key
+crl_extensions=crl_exts
+
+[crl_exts]
+authorityKeyIdentifier=keyid, issuer
